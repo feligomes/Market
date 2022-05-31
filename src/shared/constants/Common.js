@@ -1,0 +1,4 @@
+
+export const MOBILE_MAX_WIDTH = 600
+export const DESKTOP_BIG_MIN_WIDTH = 1440
+export const DESKTOP_BIG_MAX_WIDTH = 1920
