@@ -1,3 +1,7 @@
+# Market React App
+
+This project is a market of products with a cart integrated and consuming a random api found online. An npm install may be needed before running the npm start
+
 # Test it out!
 
 The app is deployed here https://feligomes.github.io/Market/ feel free to enter and test it out. Feedback is welcome :)
@@ -5,10 +9,6 @@ The app is deployed here https://feligomes.github.io/Market/ feel free to enter 
 # Documentation
 
 All the documentation of the project can be found here : https://1drv.ms/w/s!AqelGlNToasUgekeOFwwdAmBM_o8bA?e=Ljo8rg
-
-# Products Market React App
-
-This project is a market of products with a cart integrated and consuming a random api found online. An npm install may be needed before running the npm start
 
 ## Available Scripts
 
