@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import MorsumLogo from "../assets/images/MorsumLogo.png";
 import styled from "@emotion/styled";
 import {
   getCartProducts,
@@ -16,7 +15,7 @@ import NumberFormat from "react-number-format";
 import { MOBILE_MAX_WIDTH } from "../shared/constants/Common";
 import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
-import Tooltip from '@mui/material/Tooltip';
+import Tooltip from "@mui/material/Tooltip";
 
 const HeaderSection = styled.div`
   display: flex;
@@ -28,6 +27,9 @@ const HeaderSection = styled.div`
   height: 60px;
   color: white;
   font-weight: bold;
+  top: 0px;
+  z-index: 100;
+  position: sticky;
 `;
 
 const CartSection = styled.div`
@@ -48,14 +50,16 @@ const Header = () => {
   const { redirect } = useContext(Context);
 
   useEffect(() => {
-    let totalProducts = 0;
-    let totalCost = 0;
-    cartProducts.forEach((product) => {
-      totalProducts += product.quantity;
-      totalCost += product.quantity * product.price;
-    });
-    dispatch(setNumberProductsInCart(totalProducts));
-    dispatch(setCartCost(totalCost));
+    if (cartProducts) {
+      let totalProducts = 0;
+      let totalCost = 0;
+      cartProducts.forEach((product) => {
+        totalProducts += product.quantity;
+        totalCost += product.quantity * product.price;
+      });
+      dispatch(setNumberProductsInCart(totalProducts));
+      dispatch(setCartCost(totalCost));
+    }
   }, [cartProducts]);
 
   const handleClick = () => {
@@ -69,7 +73,11 @@ const Header = () => {
       <span style={{ fontSize: isMobile ? "15px" : "22px" }}>
         Morsum Market
       </span>
-      <Tooltip title={numberProductsInCart === 0 ? "Add items to the cart to continue" : ""}>
+      <Tooltip
+        title={
+          numberProductsInCart === 0 ? "Add items to the cart to continue" : ""
+        }
+      >
         <CartSection
           onClick={() => {
             handleClick();

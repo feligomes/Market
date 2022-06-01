@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="css-1yx9cri"
+>
+  <div
+    className="MuiTypography-root MuiTypography-h3 MuiTypography-gutterBottom css-y14t3a-MuiTypography-root"
+  />
+</div>
+`;

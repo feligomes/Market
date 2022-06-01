@@ -14,7 +14,6 @@ const Cart = () => {
   return (
     <Container title={"Cart"}>
       <Breadcrumb actualScreen={CART_SCREEN} />
-
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
@@ -29,7 +28,7 @@ const Cart = () => {
           </div>
         </Grid>
         <Grid item xs={6} sm={6} md={4}>
-          <SummaryCard data={cartProducts}/>
+          <SummaryCard />
         </Grid>
       </Grid>
     </Container>
