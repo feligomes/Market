@@ -19,7 +19,7 @@ const Dashboard = () => {
   const isLoading = useSelector(getIsLoading);
 
   useEffect(() => {
-    if (products.length == 0) {
+    if (products.length === 0) {
       dispatch(fetchProducts(limit));
     }
   }, []);

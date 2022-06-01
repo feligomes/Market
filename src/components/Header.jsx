@@ -9,7 +9,7 @@ import { setNumberProductsInCart, setCartCost } from "./Products/redux/slice";
 import { useSelector } from "react-redux";
 import Badge from "@mui/material/Badge";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
-import { CART_SCREEN } from "../shared/constants/screenNames";
+import { CART_SCREEN, DASHBOARD_SCREEN } from "../shared/constants/screenNames";
 import Context from "../context/Context";
 import NumberFormat from "react-number-format";
 import { MOBILE_MAX_WIDTH } from "../shared/constants/Common";
@@ -67,9 +67,18 @@ const Header = () => {
     }
   };
 
+  const handleClickHome = () => {
+    redirect(DASHBOARD_SCREEN);
+  };
+
   return (
-    <HeaderSection style={{padding : isMobile ? "0px 20px" : "0px 60px"}}>
-      <span style={{ fontSize: isMobile ? "15px" : "22px" }}>
+    <HeaderSection style={{ padding: isMobile ? "0px 20px" : "0px 60px" }}>
+      <span
+        onClick={() => {
+          handleClickHome();
+        }}
+        style={{ fontSize: isMobile ? "15px" : "22px", cursor: "pointer" }}
+      >
         Market
       </span>
       <Tooltip
