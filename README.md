@@ -1,3 +1,6 @@
+# Test it out!
+
+The app is deployed here https://feligomes.github.io/Market/ feel free to enter and test it out. Feedback is welcome :)
 
 # Documentation
 
