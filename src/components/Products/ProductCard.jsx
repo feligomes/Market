@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
@@ -17,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { setProductSelected, setCartProducts } from "../Products/redux/slice";
 import { useSelector } from "react-redux";
 import { getCartProducts } from "../Products/redux/selector";
+import NumberFormat from "react-number-format";
 
 export default function ProductCard({ data, expanded = false }) {
   const [count, setCount] = useState(0);
@@ -27,31 +27,28 @@ export default function ProductCard({ data, expanded = false }) {
   useEffect(() => {
     if (cartProducts.length > 0) {
       let index = cartProducts.findIndex((x) => x.id === data.id);
-      if (index != -1) {
+      if (index !== -1) {
         setCount(cartProducts[index].quantity);
       }
     }
   }, [cartProducts]);
-
 
   const handleClick = () => {
     dispatch(setProductSelected(data));
     redirect(PRODUCT_SCREEN);
   };
 
-  console.log(cartProducts, "cartProducts");
-
   const handleClickAdd = (e) => {
     e.stopPropagation();
     let auxCart = [...cartProducts];
     let index = cartProducts.findIndex((x) => x.id === data.id);
-    if (index != -1) {
+    if (index !== -1) {
       auxCart[index] = {
         ...auxCart[index],
         quantity: auxCart[index].quantity + 1,
       };
     } else {
-      auxCart.push({ id: data.id, quantity: 1 });
+      auxCart.push({ id: data.id, quantity: 1, price: data.price, image : data.image, title : data.title });
     }
     dispatch(setCartProducts(auxCart));
     setCount(count + 1);
@@ -78,12 +75,8 @@ export default function ProductCard({ data, expanded = false }) {
       sx={{ maxWidth: 345, margin: "auto", cursor: "pointer" }}
       onClick={() => handleClick()}
     >
-      <CardMedia
-        component="img"
-        height="140"
-        image={data.image}
-        alt="green iguana"
-      />
+
+      <img style={{margin : "20px auto", display: "block", height: "140px"}} src={data.image} alt={"Product"}/>
       <CardContent>
         <Typography
           sx={
@@ -91,8 +84,8 @@ export default function ProductCard({ data, expanded = false }) {
               display: "-webkit-box",
               overflow: "hidden",
               textOverflow: "ellipsis",
-              ["-webkit-box-orient"]: "vertical",
-              ["-webkit-line-clamp"]: "1",
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: '1',
             }
           }
           gutterBottom
@@ -107,15 +100,30 @@ export default function ProductCard({ data, expanded = false }) {
               display: "-webkit-box",
               overflow: "hidden",
               textOverflow: "ellipsis",
-              ["-webkit-box-orient"]: "vertical",
-              ["-webkit-line-clamp"]: "4",
-              minHeight: 80,
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: '4',
+              minHeight: "80px",
             }
           }
           variant="body2"
           color="text.secondary"
         >
           {data.description}
+        </Typography>
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: "bold",
+            marginTop: "10px",
+          }}
+        >
+          <NumberFormat
+            value={data.price}
+            displayType={"text"}
+            thousandSeparator={true}
+            prefix={"$"}
+            decimalScale={2}
+          />
         </Typography>
       </CardContent>
       <CardActions
@@ -142,7 +150,7 @@ export default function ProductCard({ data, expanded = false }) {
         <ButtonGroup>
           <Button
             aria-label="reduce"
-            disabled={count == 0}
+            disabled={count === 0}
             onClick={(e) => {
               handleClickRemove(e);
             }}

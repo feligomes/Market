@@ -4,22 +4,35 @@ import { getProducts } from "../Services/ProductService.js";
 const sliceName = "products";
 
 const initialState = {
-  productsList: null,
-  selectedProduct : null,
-  cartProducts : []
+  productsList: [],
+  selectedProduct: null,
+  cartProducts: [],
+  numberProductsInCart: 0,
+  cartCost: 0,
+  isLoading: false,
 };
 const productsSlice = createSlice({
   name: sliceName,
   initialState,
   reducers: {
+    setIsLoading(state, action) {
+      state.isLoading = action.payload;
+    },
     setProductSelected(state, action) {
       state.selectedProduct = action.payload;
     },
     setCartProducts(state, action) {
       state.cartProducts = action.payload;
     },
+    setNumberProductsInCart(state, action) {
+      state.numberProductsInCart = action.payload;
+    },
+    setCartCost(state, action) {
+      state.cartCost = action.payload;
+    },
     productsLoaded(state, action) {
-      state.productsList = action.payload;
+      state.productsList = action.payload
+      state.isLoading = false;
     },
     loadingReset() {
       return { ...initialState };
@@ -28,10 +41,19 @@ const productsSlice = createSlice({
 });
 const { actions, reducer } = productsSlice;
 
-export const { productsLoaded, loadingReset, setProductSelected, setCartProducts } = actions;
+export const {
+  productsLoaded,
+  loadingReset,
+  setProductSelected,
+  setCartProducts,
+  setCartCost,
+  setNumberProductsInCart,
+  setIsLoading,
+} = actions;
 
-export const fetchProducts = () => async (dispatch) => {
-  const response = await getProducts();
+export const fetchProducts = (limit) => async (dispatch) => {
+  dispatch(setIsLoading(true));
+  const response = await getProducts(limit);
   dispatch(productsLoaded(response));
 };
 

@@ -1,12 +1,22 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import MorsumLogo from "../assets/images/MorsumLogo.png";
 import styled from "@emotion/styled";
-import { getCartProducts } from "./Products/redux/selector";
+import {
+  getCartProducts,
+  getCartCost,
+  getNumberProductsInCart,
+} from "./Products/redux/selector";
+import { setNumberProductsInCart, setCartCost } from "./Products/redux/slice";
 import { useSelector } from "react-redux";
 import Badge from "@mui/material/Badge";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import { CART_SCREEN } from "../shared/constants/screenNames";
 import Context from "../context/Context";
+import NumberFormat from "react-number-format";
+import { MOBILE_MAX_WIDTH } from "../shared/constants/Common";
+import { useMediaQuery } from "react-responsive";
+import { useDispatch } from "react-redux";
+import Tooltip from '@mui/material/Tooltip';
 
 const HeaderSection = styled.div`
   display: flex;
@@ -16,49 +26,72 @@ const HeaderSection = styled.div`
   justify-content: space-between;
   background: #1a1734;
   height: 60px;
+  color: white;
+  font-weight: bold;
 `;
 
 const CartSection = styled.div`
-  color: white;
-  font-weight: bold;
-  width: 120px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  cursor : pointer
+  cursor: pointer;
 `;
 
 const Header = () => {
   const cartProducts = useSelector(getCartProducts);
-  const [count, setCount] = useState(0);
+  const dispatch = useDispatch();
+
+  const numberProductsInCart = useSelector(getNumberProductsInCart);
+  const cartCost = useSelector(getCartCost);
+
+  const isMobile = useMediaQuery({ maxWidth: MOBILE_MAX_WIDTH });
   const { redirect } = useContext(Context);
 
   useEffect(() => {
-    let productsInCart = 0;
+    let totalProducts = 0;
+    let totalCost = 0;
     cartProducts.forEach((product) => {
-      productsInCart = productsInCart + product.quantity;
+      totalProducts += product.quantity;
+      totalCost += product.quantity * product.price;
     });
-    setCount(productsInCart);
+    dispatch(setNumberProductsInCart(totalProducts));
+    dispatch(setCartCost(totalCost));
   }, [cartProducts]);
 
   const handleClick = () => {
-    redirect(CART_SCREEN);
+    if (numberProductsInCart > 0) {
+      redirect(CART_SCREEN);
+    }
   };
 
   return (
     <HeaderSection>
-      {/* <img src={MorsumLogo} /> */}
-      <span>Logo</span>
-      <CartSection
-        onClick={() => {
-          handleClick();
-        }}
-      >
-        <span>Go to Cart</span>
-        <Badge badgeContent={count} color="primary">
-          <ShoppingCart />
-        </Badge>
-      </CartSection>
+      <span style={{ fontSize: isMobile ? "15px" : "22px" }}>
+        Morsum Market
+      </span>
+      <Tooltip title={numberProductsInCart === 0 ? "Add items to the cart to continue" : ""}>
+        <CartSection
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          <span style={{ marginRight: 15 }}>Go to Cart</span>
+          <Badge badgeContent={numberProductsInCart} color="primary">
+            <ShoppingCart />
+          </Badge>
+          <NumberFormat
+            style={{
+              visibility: numberProductsInCart === 0 && "hidden",
+              marginLeft: 15,
+            }}
+            value={cartCost}
+            displayType={"text"}
+            thousandSeparator={true}
+            prefix={"$"}
+            decimalScale={2}
+          />
+        </CartSection>
+      </Tooltip>
     </HeaderSection>
   );
 };

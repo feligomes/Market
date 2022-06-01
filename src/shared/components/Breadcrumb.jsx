@@ -2,7 +2,11 @@ import React, { useContext } from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-import { PRODUCT_SCREEN, DASHBOARD_SCREEN } from "../constants/screenNames";
+import {
+  PRODUCT_SCREEN,
+  DASHBOARD_SCREEN,
+  CHECKOUT_SCREEN,
+} from "../constants/screenNames";
 import Context from "../../context/Context";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
@@ -24,7 +28,11 @@ const Breadcrumb = ({ actualScreen }) => {
       Home
     </Link>,
     <Typography key="2" color="text.primary">
-      {actualScreen === PRODUCT_SCREEN ? "Detail" : "Cart"}
+      {actualScreen === PRODUCT_SCREEN
+        ? "Detail"
+        : actualScreen === CHECKOUT_SCREEN
+        ? "Checkout"
+        : "Cart"}
     </Typography>,
   ];
 
