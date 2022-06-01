@@ -4,6 +4,6 @@ import Skeleton from '@mui/material/Skeleton';
 export default function ProductCardSkeleton() {
 
   return (
-    <Skeleton sx={{ borderRadius : "4px", margin : "auto"}}  variant="rect" width={345} height={482} />
+    <Skeleton sx={{ borderRadius : "4px", margin : "auto", maxWidth : "345px"}}  variant="rect" height={482}/>
   );
 }

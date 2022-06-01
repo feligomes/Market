@@ -21,7 +21,6 @@ const HeaderSection = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0px 60px;
   justify-content: space-between;
   background: #1a1734;
   height: 60px;
@@ -69,9 +68,9 @@ const Header = () => {
   };
 
   return (
-    <HeaderSection>
+    <HeaderSection style={{padding : isMobile ? "0px 20px" : "0px 60px"}}>
       <span style={{ fontSize: isMobile ? "15px" : "22px" }}>
-        Morsum Market
+        Market
       </span>
       <Tooltip
         title={

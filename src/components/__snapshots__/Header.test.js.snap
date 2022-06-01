@@ -2,7 +2,12 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="css-wwc0jp"
+  className="css-1s0vyms"
+  style={
+    Object {
+      "padding": "0px 60px",
+    }
+  }
 >
   <span
     style={
@@ -11,7 +16,7 @@ exports[`renders correctly 1`] = `
       }
     }
   >
-    Morsum Market
+    Market
   </span>
   <div
     aria-label=""

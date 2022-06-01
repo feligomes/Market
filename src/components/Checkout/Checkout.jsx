@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Context from "../../context/Context";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
+import { MOBILE_MAX_WIDTH } from "../../shared/constants/Common";
 
 const Checkout = () => {
   const { redirect } = useContext(Context);
@@ -21,13 +22,16 @@ const Checkout = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          height: "540px",
+          height: "400px",
           alignItems: "center",
           padding: "40px",
           textAlign: "center",
           width: "fit-contet",
           margin: "30px auto",
           justifyContent: "center",
+          [`@media (max-width:${MOBILE_MAX_WIDTH}px)`]: {
+            padding : "5px"
+          },
         }}
       >
         <Typography

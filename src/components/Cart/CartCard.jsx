@@ -14,12 +14,14 @@ import { useSelector } from "react-redux";
 import { getCartProducts } from "../Products/redux/selector";
 import NumberFormat from "react-number-format";
 import Paper from "@mui/material/Paper";
+import { useMediaQuery } from "react-responsive";
 
 export default function CartCard({ data}) {
   const [count, setCount] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const dispatch = useDispatch();
   const cartProducts = useSelector(getCartProducts);
+  const isMobile = useMediaQuery({ maxWidth: MOBILE_MAX_WIDTH });
 
   useEffect(() => {
     if (cartProducts.length > 0) {
@@ -100,7 +102,7 @@ export default function CartCard({ data}) {
       >
         {data.title}
       </Typography>
-      <div style={{display : "flex", flexDirection : "row", alignItems : "center"}}>
+      <div style={{display : "flex", flexDirection : isMobile ? "column" : "row", alignItems : "center"}}>
         <Paper
           sx={{
             borderRadius: 4,

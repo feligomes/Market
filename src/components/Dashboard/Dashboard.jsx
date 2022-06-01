@@ -44,7 +44,7 @@ const Dashboard = () => {
           >
             {products &&
               products.map((p, index) => (
-                <Grid item xs={2} sm={4} md={3} key={index}>
+                <Grid item xs={4} sm={4} md={3} key={index}>
                   <ProductCard data={p} />
                 </Grid>
               ))}
