@@ -1,3 +1,8 @@
+
+# Documentation
+
+All the documentation of the project can be found here : https://1drv.ms/w/s!AqelGlNToasUgekeOFwwdAmBM_o8bA?e=Ljo8rg
+
 # Products Market React App
 
 This project is a market of products with a cart integrated and consuming a random api found online. An npm install may be needed before running the npm start
