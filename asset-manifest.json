@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/feligomes-market/static/css/main.d63e9877.css",
+    "main.js": "/feligomes-market/static/js/main.4e08e0b3.js",
+    "static/js/787.5321f4d1.chunk.js": "/feligomes-market/static/js/787.5321f4d1.chunk.js",
+    "index.html": "/feligomes-market/index.html",
+    "main.d63e9877.css.map": "/feligomes-market/static/css/main.d63e9877.css.map",
+    "main.4e08e0b3.js.map": "/feligomes-market/static/js/main.4e08e0b3.js.map",
+    "787.5321f4d1.chunk.js.map": "/feligomes-market/static/js/787.5321f4d1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d63e9877.css",
+    "static/js/main.4e08e0b3.js"
+  ]
+}
